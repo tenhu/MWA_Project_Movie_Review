@@ -1,11 +1,21 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
 const userRouter = require('./router/user');
 
-const app = express();
+const userName = require('./hidden').getUserName();
+const passWord = require('./hidden').getPassword();
 
+const app = express();
+mongoose.connect(
+     'mongodb+srv://'+userName+':'+passWord+'@mycluster-4moia.mongodb.net/mwa_project?retryWrites=true'
+   ).then(result => {
+   console.log("ok");
+   }).catch(err => {
+     console.log(err);
+   });
 
 app.use('/movie', movieRouter);
 app.use('/review', reviewRouter);
