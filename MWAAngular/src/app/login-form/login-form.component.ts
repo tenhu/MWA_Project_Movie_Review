@@ -10,10 +10,10 @@ export class LoginFormComponent implements OnInit {
 
   myform:FormGroup;
   constructor(private fb:FormBuilder) {
-    this.myform = fb.group({
-      'username':[Validators.required],
-      'password':[Validators.required]
-    });
+    this.myform = this.fb.group({
+      'username':['',Validators.required],
+      'password':['',Validators.required]
+    });        
   }
 
   onLogin ():void {

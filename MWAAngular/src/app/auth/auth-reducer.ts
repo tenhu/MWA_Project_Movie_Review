@@ -4,6 +4,7 @@ import { LOG_IN, LOG_OUT } from './auth-actions';
 const initialState : IAuthState = {
     userinfo:{
         userid:'',
+        jwt:'',
         username:''
     }
 }

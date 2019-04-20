@@ -1,4 +1,5 @@
 export interface IUserInfo{
+    jwt:string;
     userid:string,
     username:string,
     photo?:string,
