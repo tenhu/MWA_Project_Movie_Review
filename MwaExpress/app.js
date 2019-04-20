@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
@@ -16,6 +17,8 @@ mongoose.connect(
    }).catch(err => {
      console.log(err);
    });
+
+app.use(bodyParser.json()); 
 
 app.use('/movie', movieRouter);
 app.use('/review', reviewRouter);

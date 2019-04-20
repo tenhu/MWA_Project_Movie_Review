@@ -3,31 +3,40 @@ const Schema = mongoose.Schema;
 
 
 const movieSchema = new Schema({
-     title: {
-         type: String,
-         required: true
-     },
-     description: {
-         type: String,
-         required:true
-     }
- });
+    title: {
+        type: String,
+        required: true
+    },
+    released: {
+        type: String,
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    },
+    director: {
+        type: String,
+        required: true
+    },
+    review: {
+        reviews: [
+            {
+                userName: { type: String, require: true },
+                rate: { type: Number, require: true },
+                comment: { type: String, require: true }
+            }
+        ]
+    },
+    cinema: {
+        cinemas: [
+            {
+                cinemaName: { type: String, require: true },
+                location: [{ long: {type:Number, require: true}, lat: {type:Number, require: true}}]
+            }
+        ]
+    }
 
- movieSchema.methods.addMovie = function (newUserName, newComment) {
+});
 
-     console.log('called: addComment');
-     const updatedComments = [...this.comment.comments];
- 
-     updatedComments.push({
-         userName: newUserName,
-         userComment: newComment
-       });
- 
-     const updatedComment = {
-         comments: updatedComments
-       };
-       this.comment = updatedComment;
-       return this.save();
- }
- 
- module.exports = mongoose.model('Movies', movieSchema); 
+module.exports = mongoose.model('Movies', movieSchema); 
