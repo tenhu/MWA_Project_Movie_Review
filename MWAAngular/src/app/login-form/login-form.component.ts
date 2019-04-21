@@ -13,6 +13,7 @@ import { AuthActions } from '../auth/auth-actions';
 export class LoginFormComponent implements OnInit {
 
   myform:FormGroup;
+  errors:[];
   constructor(private fb:FormBuilder, private loginService:LoginService,private jwtHelper: JwtHelperService) {
     this.myform = this.fb.group({
       'username':['',Validators.required],
@@ -26,9 +27,14 @@ export class LoginFormComponent implements OnInit {
         this.myform.controls['username'].value,
         this.myform.controls['password'].value)
       .then((res:any)=>{
-        let userinfo = res.userinfo;
-        userinfo.jwt = res.jwt;
-        authStore.dispatch(AuthActions.login(userinfo));
+        if(res.succeeded){
+          let userinfo = res.data.userinfo;
+          userinfo.jwt = res.data.jwt;
+          authStore.dispatch(AuthActions.login(userinfo));
+          this.errors = [];
+        }else{
+          this.errors = res.error;
+        }
       });
     }
   }
