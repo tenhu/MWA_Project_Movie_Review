@@ -10,9 +10,11 @@ import { ReviewComponent } from './review/review.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginStatusComponent } from './login-status/login-status.component';
 import { LogoutComponent } from './logout/logout.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiUrlInterceptor } from './commons/api-interceptor';
-import { AuthInterceptor } from './auth/auth-http-interceptor';
+import { JwtConfig } from './auth/auth-jwt';
+import { LoginService } from './services/loginService';
+import { Configurations } from './commons/configurations';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,14 @@ import { AuthInterceptor } from './auth/auth-http-interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    JwtConfig
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},
-    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+    Configurations,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

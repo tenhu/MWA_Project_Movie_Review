@@ -9,11 +9,20 @@ const initialState : IAuthState = {
     }
 }
 
-function login(state,action):IAuthState{
-    return Object.assign({}, state, {userinfo:action.payload})
+function updateLocalToken(state){
+    localStorage.setItem('access_token', state.userinfo.jwt);
 }
-function logout(state,action):IAuthState{
-    return Object.assign({}, state, {userinfo:{userid:'', username:''}})
+
+function login(state,action):IAuthState{
+    const newstate = Object.assign({}, state, {userinfo:action.payload})
+    updateLocalToken(newstate);
+    return newstate;
+}
+
+function logout(state, action):IAuthState{
+    const newstate = Object.assign({}, state, {userinfo:{userid:'', username:'', jwt:''}})    
+    updateLocalToken(newstate);
+    return newstate;
 }
 
 export function reducer(state: IAuthState = initialState, action){

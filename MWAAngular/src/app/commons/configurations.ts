@@ -4,9 +4,9 @@ import { Injectable } from "@angular/core";
 export class Configurations{
     baseApiUrl = ''
     constructor(){
-        window.document.getElementsByName('apibase').forEach((el) =>{
-            el.getAttribute("href");
-        })
-
+        const children = Array.prototype.slice.call(window.document.getElementsByTagName('apibase'));
+        children.forEach((el) =>{
+            this.baseApiUrl = el.getAttribute("href");
+        });
     }    
 }

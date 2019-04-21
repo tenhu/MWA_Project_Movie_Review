@@ -9,7 +9,10 @@ export class ApiUrlInterceptor implements HttpInterceptor {
 
     constructor(private config: Configurations){}
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const apireq = req.clone({url:this.config.baseApiUrl + req.url});
+        const apireq = req.clone({
+            url:this.config.baseApiUrl + req.url,
+            headers:req.headers.set('Content-Type','application/json')
+        });
         return next.handle(apireq);
     }
 }
