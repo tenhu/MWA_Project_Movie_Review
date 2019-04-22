@@ -13,6 +13,7 @@ import { AuthActions } from '../auth/auth-actions';
 export class LoginFormComponent implements OnInit {
 
   myform:FormGroup;
+  loginsucceeded = false;
   errors:[];
   constructor(private fb:FormBuilder, private loginService:LoginService,private jwtHelper: JwtHelperService) {
     this.myform = this.fb.group({
@@ -32,6 +33,7 @@ export class LoginFormComponent implements OnInit {
           userinfo.jwt = res.data.jwt;
           authStore.dispatch(AuthActions.login(userinfo));
           this.errors = [];
+          this.loginsucceeded = true;
         }else{
           this.errors = res.error;
         }

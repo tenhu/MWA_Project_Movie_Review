@@ -16,6 +16,7 @@ import { JwtConfig } from './auth/auth-jwt';
 import { LoginService } from './services/loginService';
 import { Configurations } from './commons/configurations';
 import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.com
     LoginFormComponent,
     LoginStatusComponent,
     LogoutComponent,
-    MovieAddEditComponent
+    MovieAddEditComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

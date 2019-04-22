@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use('/movie', movieRouter);
 app.use('/review', reviewRouter);
-app.use('/user', jwt(), userRouter);
+app.use('/user', jwt(['admin']), userRouter);
 app.use('/login', loginRouter);
 
 app.get('/', (req, res) => {

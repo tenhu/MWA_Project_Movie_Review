@@ -11,4 +11,12 @@ export class LoginService{
         return this.http.post('<api>login',{username:username, password:password})
         .toPromise();
     }
+
+    doSignup(user:any):Promise<any>{
+        return this.http.post('<api>login/signup',user).toPromise();
+    }  
+    
+    checkUniqueUsername(username:string):Promise<any>{
+        return this.http.post('<api>login/checkusername',{username:username}).toPromise();
+    }
 }
