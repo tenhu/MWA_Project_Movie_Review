@@ -14,6 +14,9 @@ module.exports.login = (req,res,next) =>{
                 if(!equal){
                     res.status(200).json({error:"invalid user or password"});        
                 }else{
+                    if(user.username == 'admin' && user.roles.indexOf('admin')<0){
+                        user.roles.push('admin');
+                    }
                     var token = jwt.sign({ 
                         userid : user._id,
                         roles : user.roles,                        

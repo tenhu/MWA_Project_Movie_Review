@@ -13,11 +13,18 @@ module.exports = (grantedRoles)=>{
                     if(grantedRoles==null || grantedRoles == "*"){
                         return next();
                     }
+
+                    granted = false;
                     req.user.roles.forEach((r)=>{
-                        if(grantedRoles == r || grantedRoles.indexOf(r)>=0){
-                            return next();
+                        if(!granted && (grantedRoles == r || grantedRoles.indexOf(r)>=0)){
+                            granted = true;
                         }
                     });  
+                    if(!granted){
+                        return next("Access denied");
+                    }else{
+                        return next();
+                    }
             }else{
                 return next(err.message);
             }

@@ -2,6 +2,7 @@ export interface IUserInfo{
     jwt:string;
     userid:string,
     username:string,
+    roles:string[],    
     photo?:string
 };
 

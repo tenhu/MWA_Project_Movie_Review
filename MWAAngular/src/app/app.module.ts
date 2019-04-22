@@ -18,6 +18,7 @@ import { Configurations } from './commons/configurations';
 import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
+import { MovieAdminComponent } from './movie-admin/movie-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,9 @@ import { HeaderComponent } from './header/header.component';
     LoginStatusComponent,
     LogoutComponent,
     MovieAddEditComponent,
-    SignUpComponent
-    HeaderComponent
+    SignUpComponent,
+    HeaderComponent,
+    MovieAdminComponent
   ],
   imports: [
     BrowserModule,
