@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-var cors = require('cors')
+const cors = require('cors');
 
 const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
