@@ -5,13 +5,16 @@ import { LogoutComponent } from './logout/logout.component';
 import { MovieComponent } from './movie/movie.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MovieAdminComponent } from './movie-admin/movie-admin.component';
+import { JWTCanActivate } from './auth/jwt-can-activate';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
+  {path:'error', component:ErrorComponent},
   {path:'login', component:LoginFormComponent},
   {path:'logout', component:LogoutComponent},
   {path:'movie', component: MovieComponent},
   {path:'admin', children:[{
-    path:'movie', component:MovieAdminComponent, data:{roles:'admin'}
+    path:'movie', component:MovieAdminComponent, data:{roles:'admin'}, canActivate:[JWTCanActivate]
   }]},
   {path:'signup', component: SignUpComponent}
 ];

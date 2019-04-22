@@ -10,3 +10,6 @@
   </div>
 </div>
 <button (click)="testapi()">Test Api</button>
+<a [routerLink]="[ 'admin','movie' ]" [jwt]="['admin']">Test Admin</a>
+<a [routerLink]="[ 'admin','movie' ]" jwt="admin">Test Admin2</a>
+<a [routerLink]="[ 'admin','movie' ]" jwt>Test Login Required</a>

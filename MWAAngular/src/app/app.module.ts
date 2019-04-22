@@ -19,6 +19,10 @@ import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.com
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { MovieAdminComponent } from './movie-admin/movie-admin.component';
+import { JWTCanActivate } from './auth/jwt-can-activate';
+import { ErrorService } from './services/errorService';
+import { ErrorComponent } from './error/error.component';
+import { JwtDirective } from './auth/jwt.directive';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { MovieAdminComponent } from './movie-admin/movie-admin.component';
     MovieAddEditComponent,
     SignUpComponent,
     HeaderComponent,
-    MovieAdminComponent
+    MovieAdminComponent,
+    ErrorComponent,
+    JwtDirective
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,9 @@ import { MovieAdminComponent } from './movie-admin/movie-admin.component';
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},
     Configurations,
-    LoginService
+    LoginService,
+    JWTCanActivate,
+    ErrorService    
   ],
   bootstrap: [AppComponent]
 })
