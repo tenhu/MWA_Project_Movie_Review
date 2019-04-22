@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var cors = require('cors')
 
 const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
@@ -16,6 +17,7 @@ mongoose.connect(settings.mongodb.connectionstring).then(result => {
      console.log(err);
    });
 
+app.use(cors());
 app.use(bodyParser.json()); 
 
 app.use('/movie', movieRouter);

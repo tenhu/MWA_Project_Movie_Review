@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(private http:HttpClient){}
   testapi(){
-    this.http.get('/user/gettest').toPromise().then((data)=>{
+    this.http.get('<api>user/gettest').toPromise().then((data)=>{
       console.log(data);
     })
   }

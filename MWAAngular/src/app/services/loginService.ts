@@ -8,7 +8,7 @@ export class LoginService{
     constructor(private http:HttpClient){}
 
     doLogin(username:string, password:string):Promise<any>{
-        return this.http.post('login',{username:username, password:password})
+        return this.http.post('<api>login',{username:username, password:password})
         .toPromise();
     }
 }
