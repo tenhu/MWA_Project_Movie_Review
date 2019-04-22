@@ -3,9 +3,10 @@
   -->
   <ul>
     <li *ngFor="let movie of movies">
-      <div>
+      <div id="movie">
         <img src="{{movie.imageUrl}}" alt="Italian Trulli">
         <a href="movie/get/{{movie._id}}"> {{movie.title}} </a>
+        
       </div>
     </li>
   </ul>
