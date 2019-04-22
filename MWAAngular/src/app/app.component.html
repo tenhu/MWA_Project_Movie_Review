@@ -1,9 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <app-login-status></app-login-status>
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+<app-login-status></app-login-status>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
-<router-outlet></router-outlet>
 <button (click)="testapi()">Test Api</button>

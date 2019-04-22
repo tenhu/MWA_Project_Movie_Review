@@ -18,4 +18,8 @@ export class MovieService {
     }).toPromise(); 
   }  
 
+  getMovies() {
+    return this.http.get('http://localhost:3000/movie').toPromise();
+  }   
+
 }

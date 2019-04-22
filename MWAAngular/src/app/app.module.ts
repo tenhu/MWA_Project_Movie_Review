@@ -17,6 +17,7 @@ import { LoginService } from './services/loginService';
 import { Configurations } from './commons/configurations';
 import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     LogoutComponent,
     MovieAddEditComponent,
     SignUpComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
