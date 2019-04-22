@@ -1,19 +1,40 @@
 
 var jwt = require('jsonwebtoken');
+const User = require('../model/userModel');
+const bcrypt = require('bcrypt');
+
 const settings = require('../hidden');
 
 module.exports.login = (req,res,next) =>{
-    var token = jwt.sign({ 
-        userid:'1' ,
-        username:'test',
-        exp: Math.floor(Date.now() / 1000) + (60 * 20) //expired 20min.
-    }, settings.jwtsecretekey);
-    res.status(200).json({
-        userinfo:{        
-            userid:'1' ,
-            username:'test',
-            photo:''
-            /// more info here.        
-        }, 
-        jwt:token});
+    const username = req.body.username;
+    const password = req.body.password;
+    User.findOne({username:username},(err, user) =>{
+        if(user!=null){
+            bcrypt.compare(password, user.password).then(function(equal) {
+                if(!equal){
+                    res.status(200).json({error:"invalid user or password"});        
+                }else{
+                    var token = jwt.sign({ 
+                        userid : user._id,
+                        roles : user.roles,                        
+                        exp: Math.floor(Date.now() / 1000) + (60 * 20) //expired 20min.
+                    }, settings.jwtsecretekey);
+                                        
+                    res.status(200).json({succeeded:true,
+                                            'data':{
+                                                userinfo:{        
+                                                    userid:user._id,
+                                                    username:user.username,
+                                                    name:user.name,
+                                                    photo:user.photo,
+                                                    roles : user.roles
+                                                }, 
+                                                jwt:token}
+                                            });        
+                }
+            });
+        }else{
+            res.status(200).json({'error':"invalid user or password"});        
+        }
+    });
 }; 
