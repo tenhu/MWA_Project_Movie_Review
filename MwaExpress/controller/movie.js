@@ -28,7 +28,7 @@ module.exports.addMovie = (req, res, next) => {
     .save()
     .then(result => {
       console.log('Created Movie');
-      res.send('added');
+      res.status(201).json({ success : 1 });
     })
     .catch(err => {
       console.log(err);
