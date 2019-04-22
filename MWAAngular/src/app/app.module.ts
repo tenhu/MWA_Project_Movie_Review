@@ -15,6 +15,7 @@ import { ApiUrlInterceptor } from './commons/api-interceptor';
 import { JwtConfig } from './auth/auth-jwt';
 import { LoginService } from './services/loginService';
 import { Configurations } from './commons/configurations';
+import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { Configurations } from './commons/configurations';
     ReviewComponent,
     LoginFormComponent,
     LoginStatusComponent,
-    LogoutComponent
+    LogoutComponent,
+    MovieAddEditComponent
   ],
   imports: [
     BrowserModule,
