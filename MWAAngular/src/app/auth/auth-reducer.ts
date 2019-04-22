@@ -5,7 +5,8 @@ const initialState : IAuthState = {
     userinfo:{
         userid:'',
         jwt:'',
-        username:''
+        username:'',
+        roles:[]
     }
 }
 
@@ -20,7 +21,7 @@ function login(state,action):IAuthState{
 }
 
 function logout(state, action):IAuthState{
-    const newstate = Object.assign({}, state, {userinfo:{userid:'', username:'', jwt:''}})    
+    const newstate = Object.assign({}, state, {userinfo:{userid:'', username:'', roles:[], jwt:''}})    
     updateLocalToken(newstate);
     return newstate;
 }
