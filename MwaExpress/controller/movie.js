@@ -2,7 +2,10 @@
 const Movie = require('../model/movieModel');
 
 module.exports.showMovie = (req, res, next) => {
-  res.send('good Movie');
+  Movie.find({}, (err, movie) => {
+    console.log(movie);
+    res.status(201).json(movie);
+  });
 };
 
 module.exports.addMovie = (req, res, next) => {
@@ -36,3 +39,6 @@ module.exports.addMovie = (req, res, next) => {
 
 }; 
 
+module.exports.editMovie = (req, rest) => {
+  
+}

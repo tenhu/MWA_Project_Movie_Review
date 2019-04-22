@@ -1,6 +1,16 @@
 <div>
-  <!-- movie works! -->
+  <!-- movie works!  {{movies}}
+  -->
+  <ul>
+    <li *ngFor="let movie of movies">
+      <div>
+        <img src="{{movie.imageUrl}}" alt="Italian Trulli">
+        <a href="movie/get/{{movie._id}}"> {{movie.title}} </a>
+      </div>
+    </li>
+  </ul>
+
 </div>
 
-
-<app-movie-add-edit></app-movie-add-edit>
+<!-- <app-movie-add-edit></app-movie-add-edit>
+  -->

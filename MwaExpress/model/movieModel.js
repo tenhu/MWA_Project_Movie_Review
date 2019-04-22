@@ -35,7 +35,17 @@ const movieSchema = new Schema({
                 location: [{ long: {type:Number, require: true}, lat: {type:Number, require: true}}]
             }
         ]
-    }
+    }, 
+    type: {
+        type: String,
+        required : true
+    },
+
+    descripton: {
+        type: String, 
+        required: true 
+    } 
+
 
 });
 
