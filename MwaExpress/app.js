@@ -6,7 +6,7 @@ const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
 const userRouter = require('./router/user');
 const loginRouter = require('./router/login');
-
+const jwt = require('./commons/jwt');
 const settings = require('./hidden');
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use('/movie', movieRouter);
 app.use('/review', reviewRouter);
-app.use('/user', userRouter);
+app.use('/user', jwt(), userRouter);
 app.use('/login', loginRouter);
 
 app.get('/', (req, res) => {

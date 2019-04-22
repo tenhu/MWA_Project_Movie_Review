@@ -3,7 +3,6 @@ var jwt = require('jsonwebtoken');
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt');
 
-
 const settings = require('../hidden');
 
 module.exports.login = (req,res,next) =>{

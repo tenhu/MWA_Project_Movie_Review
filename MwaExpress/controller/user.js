@@ -27,9 +27,10 @@ module.exports.loadtest = (req,res,next) =>{
           }else{
                u.save((err)=>{
                     if(err){
-                         console.log(err);
+                         next("Insert faield");
+                    }else{
+                         insertUser();
                     }
-                    insertUser();
                });
           }
      };
@@ -38,7 +39,7 @@ module.exports.loadtest = (req,res,next) =>{
 }; 
 
 module.exports.gettest = (req,res,next) =>{
-     User.find({},(err, data)=>{
+     User.find({},{password:0},(err, data)=>{
           res.status(200).json(data);
      });
 }
