@@ -16,7 +16,8 @@ module.exports = (grantedRoles)=>{
 
                     granted = false;
                     req.user.roles.forEach((r)=>{
-                        if(!granted && (grantedRoles == r || grantedRoles.indexOf(r)>=0)){
+                        if(!granted && ((typeof grantedRoles == 'string' && grantedRoles == r)
+                                            ||(typeof grantedRoles != 'string' && grantedRoles.indexOf(r)>=0))){
                             granted = true;
                         }
                     });  

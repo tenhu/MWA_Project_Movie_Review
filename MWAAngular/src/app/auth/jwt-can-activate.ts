@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { authStore } from '../auth/auth-store';
+import { ErrorService } from '../services/errorService';
 
 @Injectable()
 export class JWTCanActivate{
-    constructor(private router:Router, ){
+    constructor(private router:Router, private errorHandler: ErrorService){
 
     }
 
@@ -18,13 +19,14 @@ export class JWTCanActivate{
             let granted = false;
             authStore.getState().userinfo.roles.forEach(r=>{
                 if(!granted){
-                    if(roles == r || roles.indexOf(r)>=0){
+                    if((typeof roles == 'string' && roles == r) 
+                    || (typeof roles != 'string' && roles.indexOf(r)>=0)){
                         granted = true;
                     }
                 }
             });
             if(!granted){
-                this.router.navigate(['/access-denied']);                    
+                this.errorHandler.navigateToError("Acces denied");   
             }
             return granted;
         }else{
