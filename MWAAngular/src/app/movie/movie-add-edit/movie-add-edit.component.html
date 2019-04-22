@@ -1,0 +1,25 @@
+<form [formGroup]="movieForm" (ngSubmit)="onSubmit()"> 
+
+  <div class="form-group">
+    <label for="title">Movie Title</label>
+    <input type="text" class="form-control" id="title" formControlName="title">
+  </div>
+
+  <div class="form-group">
+    <label for="released">Release Date</label>
+    <input type="text" class="form-control" id="released" formControlName="released">
+  </div>
+
+  <div class="form-group">
+    <label for="imageurl">Image URL</label>
+    <input type="text" class="form-control" id="imageurl" formControlName="imageurl">
+  </div>
+
+  <div class="form-group">
+    <label for="director">Movie Director</label>
+    <input type="text" class="form-control" id="director" formControlName="director">
+  </div>
+
+
+  <button type="submit" class="btn btn-primary" [disabled]="!movieForm.valid">Submit</button>
+</form>
