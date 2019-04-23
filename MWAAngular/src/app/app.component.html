@@ -7,12 +7,8 @@
       <div class="jumbotron text-center" style="margin-bottom:0">
         <h1>Welcome to Movie Review</h1>
       </div>
-      <app-header (featureSelected)="onNavigate($event)"></app-header>
+      <app-header ></app-header>
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
-<button (click)="testapi()">Test Api</button>
-<a [routerLink]="[ 'admin','movie' ]" [jwt]="['admin']">Test Admin</a>
-<a [routerLink]="[ 'admin','movie' ]" jwt="admin">Test Admin2</a>
-<a [routerLink]="[ 'admin','movie' ]" jwt>Test Login Required</a>
