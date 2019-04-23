@@ -50,6 +50,7 @@ export class MovieAdminComponent implements OnInit {
 
   onAdd(){
     const dialogRef = this.dialog.open(ManageMovieFormComponent, {
+      minWidth:'400px',width:'600px',
       data: {}
     });
 
@@ -62,6 +63,7 @@ export class MovieAdminComponent implements OnInit {
 
   onEdit(movieid){
     const dialogRef = this.dialog.open(ManageMovieFormComponent, {
+      minWidth:'400px',width:'600px',
       data: {id:movieid}
     });
 
@@ -126,12 +128,16 @@ export class ManageMovieFormComponent implements OnInit {
             this.movie = m.data;
           }else{
             this.dialogRef.close(false);
-            this.dialog.open(ConfirmDialogComponent,{data:{message:'Movie not found', icon:'error', buttons:'okonly'}})
+            this.dialog.open(ConfirmDialogComponent,
+              {data:{message:'Movie not found', icon:'error', buttons:'okonly'}}
+            )
           }
         })
         .catch((err)=>{
           this.dialog.open(ConfirmDialogComponent,
-            {data:{message:'Server error', buttons:'okonly', icon:'error'}});
+            {              
+              data:{message:'Server error', buttons:'okonly', icon:'error'}
+            });
         })
         .finally(()=>this.locking = false);
     }
@@ -156,6 +162,7 @@ export class ManageMovieFormComponent implements OnInit {
   }
 
   onSave(closeAfterSave){
+    if(this.form.valid){
       let p=this.movieid!=null?
       this.service.update(this.movieid, this.getMovieFromForm()):
       this.service.add(this.getMovieFromForm());
@@ -177,6 +184,7 @@ export class ManageMovieFormComponent implements OnInit {
           {data:{message:'Server error', buttons:'okonly', icon:'error'}});
       })
       .finally(()=>this.locking = false);
+    }
   }  
 
   onCancel(){
