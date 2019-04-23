@@ -10,8 +10,9 @@ module.exports.showMovie = (req, res, next) => {
 module.exports.showOneMovie = (req, res, next) => {
   Movie.find({"_id":req.params.id}).then(function (movie) {
     console.log(req.params.id)
-    res.send(movie);
+    res.json(movie);
   });
+};
 
 module.exports.addMovie = (req, res, next) => {
 
@@ -47,8 +48,6 @@ module.exports.addMovie = (req, res, next) => {
     });
   };
 
-
-};
 
 
 
