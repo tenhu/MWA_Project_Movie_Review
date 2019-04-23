@@ -12,7 +12,7 @@ module.exports.showOneMovie = (req, res, next) => {
     console.log(req.params.id)
     res.send(movie);
   });
-
+};
 module.exports.addMovie = (req, res, next) => {
 
   const title = req.body.title;
@@ -47,8 +47,6 @@ module.exports.addMovie = (req, res, next) => {
     });
   };
 
-
-};
 
 
 
