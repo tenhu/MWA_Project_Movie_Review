@@ -16,10 +16,9 @@ export class MovieComponent implements OnInit {
 
   ngOnInit() {
     this.movieService.getMovies().then(movie => {
-      console.log('[inside]' + JSON.stringify (movie));
+      //console.log('[inside]' + JSON.stringify (movie));
       this.movies = JSON.parse(JSON.stringify( movie));
      });
-    //console.log('[Movies]' + this.movies);
   }
 
 

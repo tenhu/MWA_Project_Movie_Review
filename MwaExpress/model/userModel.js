@@ -32,4 +32,17 @@ userSchema.pre('save', function(next){
     }
 });
 
-module.exports = mongoose.model('User', userSchema); 
+userSchema.statics.initAdminUser = function(){
+    this.findOne({username:'admin'},(e,u)=>{
+        if(u==null){
+            u = new User({
+                username:'admin',
+                password:'mwa',
+                roles:['admin']
+            });
+            u.save();
+        }
+    });
+};
+
+const User = module.exports = mongoose.model('User', userSchema); 

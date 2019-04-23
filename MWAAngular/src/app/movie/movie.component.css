@@ -1,15 +1,96 @@
-#movie {
+
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    font-family: Avenir, Arial, sans-serif;
+    color: #fff;
+    background: #000;
+  }
+  
+  header {
+    background: #333;
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-weight: 100;
+  }
+  
+  h1 span {
+    font-size: 1rem;
+  }
+  
+  #movie {
     margin: 2rem auto;
-    width: 90%;
+    width: 50%;
     max-width: 45rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 2rem;
-  
-
 
   }
+  input
+  {
+      width: 400px;
+      height: 100px;
+      max-lines: 6;
+
+  }
+  textarea {
+    resize: none;
+    padding: 2px;
+    height: 100px;
+    width: 100%;
+    border: 1px solid #F2F2F2;
+}
+  .boxx{
+    margin-top: 8px;
+    padding: 7px 7px 7px 7px;
+    left: 30%;
+    border: 2px solid gray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width:280px;
+    font-size: 8pt;
+    height: 80px;
+    font-weight: bold;
+    background-color: #E8DC9B;
+  }
+  
+  .img2{
+    float: left;
+    vertical-align: top;
+    margin: 2px 2px 2px 2px;
+    height: 18px;
+    width: 18px;
+  }
+  #comment {
+   float:right;
+   margin-right: 130px;
+   overflow-y:auto;
+   max-height:600px;
+
+  }
+
+  
   #movie img {
     width: 100%;
   }
   
+<<<<<<< HEAD
+  .star {
+    letter-spacing: .5rem;
+    color: #ff0;
+  }
+  
+  .nonrate {
+    color: #444;
+  }
+=======
+  
+>>>>>>> a681903100f690750c039b70f0937edbc9cf7cfc

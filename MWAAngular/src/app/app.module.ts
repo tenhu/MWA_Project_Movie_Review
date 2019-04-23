@@ -16,7 +16,16 @@ import { JwtConfig } from './auth/auth-jwt';
 import { LoginService } from './services/loginService';
 import { Configurations } from './commons/configurations';
 import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
+import { GetMovieService } from './services/get-movie.service';
+import { StarComponent } from './review/star.component';
+import { MovieDetailsComponent } from './review/movie-details.component';
+import { MovieAdminComponent } from './movie-admin/movie-admin.component';
+import { JWTCanActivate } from './auth/jwt-can-activate';
+import { ErrorService } from './services/errorService';
+import { ErrorComponent } from './error/error.component';
+import { JwtDirective } from './auth/jwt.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +37,12 @@ import { HeaderComponent } from './header/header.component';
     LoginStatusComponent,
     LogoutComponent,
     MovieAddEditComponent,
-    HeaderComponent
+    HeaderComponent,StarComponent,MovieDetailsComponent,
+    SignUpComponent,
+    HeaderComponent,
+    MovieAdminComponent,
+    ErrorComponent,
+    JwtDirective
   ],
   imports: [
     BrowserModule,
@@ -40,7 +54,10 @@ import { HeaderComponent } from './header/header.component';
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},
     Configurations,
-    LoginService
+    LoginService,GetMovieService,
+    LoginService,
+    JWTCanActivate,
+    ErrorService    
   ],
   bootstrap: [AppComponent]
 })
