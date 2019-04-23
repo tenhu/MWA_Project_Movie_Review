@@ -24,7 +24,8 @@ import { ErrorService } from './services/errorService';
 import { ErrorComponent } from './error/error.component';
 import { JwtDirective } from './auth/jwt.directive';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
+import { MaterialModules } from './material-modules';
+
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/mater
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    JwtConfig,MatButtonModule, MatCheckboxModule,MatTableModule
+    JwtConfig,
+    MaterialModules
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},

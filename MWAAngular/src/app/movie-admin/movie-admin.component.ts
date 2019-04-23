@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieManagerService } from '../services/movieManagerService';
+import { PageEvent } from '@angular/material';
+import { toTypeScript } from '@angular/compiler';
 
 @Component({
   selector: 'app-movie-admin',
@@ -13,24 +15,24 @@ export class MovieAdminComponent implements OnInit {
   private options;
   movies:{};
   ngOnInit(): void {
-      this.list(this.options={p:1});
+      this.list({p:1});
   }
 
   list(options){
+    this.options = options;
     this.service.list(this.options={p:1})
     .then((result:any) => {
       this.movies = result;
+    }).catch((err)=>{
+      this.movies={};
     });
   }
 
-  onPaging(page:number){
-      this.options=Object.assign({}, this.options,{p:page});
-      this.list(this.options);
+  onPaging(page:PageEvent){
+      this.list(Object.assign({}, this.options,{p:page.pageIndex}));
   }
 
   onSearch(q:string){        
-      this.options=Object.assign({},this.options,{p:1,q:q});
-      this.list(this.options);
+      this.list(Object.assign({},this.options,{p:1,q:q}));
   }
-
 }

@@ -1,4 +1,10 @@
 <div>
+  <form>
+    <mat-form-field>
+        <input matInput placeholder="Search" value="">
+        <button mat-icon-button><mat-icon>search</mat-icon></button>
+    </mat-form-field>
+  </form>
 <table mat-table [dataSource]="movies.docs" class="mat-elevation-z8">
 
   <ng-container matColumnDef="position">
@@ -37,5 +43,8 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [pageSize]="20" [length]="movies.total" showFirstLastButtons></mat-paginator>
+<mat-paginator (page)="onPaging($event)" [pageSize]="20" 
+              [pageIndex] = "movies.page"
+              [hidePageSize] = "true"  
+              [length]="movies.total" showFirstLastButtons></mat-paginator>
 </div>
