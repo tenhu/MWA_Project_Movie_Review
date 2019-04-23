@@ -3,6 +3,7 @@ import { GetMovieService } from '../services/get-movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ReviewComponent } from './review.component';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,7 +13,6 @@ import { Subscription } from 'rxjs';
 export class MovieDetailsComponent implements OnInit {
     rateUs = false;
    
-  current_userTest = "youserrr";
 mymovie;
 showCinema = false
 myform:FormGroup;
@@ -28,18 +28,21 @@ movie_type;
 movie_image;
 movie_release;
 movie_views=0;
-movie_comments;
+movie_comments:|any|any[];
 movie_cinemas;
+xurrentComment;
 rateStar = 0;
 
 currentUserReview;
-
+current_userTest
 
 movie_AvgRate:number = 0;
 
 
 
   constructor(private movie:GetMovieService,private route:ActivatedRoute,private fb:FormBuilder) { 
+this.current_userTest = "salem22";
+
     this.myform = this.fb.group({
         'comment1':['',Validators.required],
       });    
@@ -52,13 +55,17 @@ console.log(this.newvote)
 if(this.newvote)
 {
 this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,this.myform.controls['comment1'].value,2).then(data=>console.log(data));
-
+console.log("Set")
+this.newvote = false;
 this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comment:this.myform.controls['comment1'].value})   
 
 }
     else
     {
         this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,this.myform.controls['comment1'].value,1).then(data=>console.log(data));
+      
+        console.log("push")
+
         this.movie_comments = this.movie_comments.filter(comment => comment.userName !== this.current_userTest);        
 
         this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comment:this.myform.controls['comment1'].value})   
@@ -70,6 +77,7 @@ this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comm
 
   cinemaShow(e:Event)
   {
+    if(this.movie_cinemas.length > 0)
     this.showCinema = true;
   }
 
@@ -109,11 +117,12 @@ this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comm
       console.log(this.movie_AvgRate);
 
       this.movie_comments = this.mymovie[0].review.reviews;
+      this.movie_comments = this.movie_comments.filter(comment => comment.comment.trim() !== "");
 
       console.log(this.movie_comments);
       console.log(this.current_userTest);
 
-      var currReview = this.mymovie[0].review.reviews.filter(review=> review.userName === this.current_userTest ); 
+      var currReview = this.mymovie[0].review.reviews.filter(review=> review.userName === this.current_userTest); 
       console.log(currReview)
       if(currReview.length !== 0)
       {
@@ -124,7 +133,8 @@ this.currentUserReview = currReview[0];
 
       this.myform.controls['comment1'].setValue(this.currentUserReview.comment)
 this.rateStar = this.currentUserReview.rate
-console.log(this.rateStar);     
+console.log(this.rateStar); 
+this.xurrentComment = this.currentUserReview.comment    
       }
       else
       {
@@ -132,6 +142,10 @@ console.log(this.rateStar);
       }
 
 
+}
+else
+{
+  this.movie_comments =[]
 }
 
 
@@ -148,12 +162,13 @@ this.rateStar = e;
 console.log(e)
 if(this.newvote)
 {
+  this.newvote =false;
 this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,"",2).then(data=>console.log(data));
 }
 else
 {
 
-    this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,this.currentUserReview.comment,1).then(data=>console.log(data));
+    this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,this.xurrentComment,1).then(data=>console.log(data));
 
 }
     
