@@ -1,17 +1,28 @@
 import { IAuthState } from "./auth-state";
 import { LOG_IN, LOG_OUT } from './auth-actions';
+import * as moment from 'moment';
 
-const initialState : IAuthState = {
-    userinfo:{
-        userid:'',
-        jwt:'',
-        username:'',
-        roles:[]
-    }
+let initialState : IAuthState = JSON.parse(localStorage.getItem('authstate'));
+
+if(initialState!=null){
+    initialState.userinfo.exp = moment(initialState.userinfo.exp);
+}
+
+if(initialState==null || initialState.userinfo.exp < moment()){
+    initialState={
+        userinfo:{
+            userid:'',
+            jwt:'',
+            username:'',
+            roles:[],
+            exp: moment().add(20,'minute')
+        }
+    }    
 }
 
 function updateLocalToken(state){
     localStorage.setItem('access_token', state.userinfo.jwt);
+    localStorage.setItem('authstate', JSON.stringify(state));
 }
 
 function login(state,action):IAuthState{

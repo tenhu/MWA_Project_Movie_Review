@@ -7,6 +7,7 @@ const movieRouter = require('./router/movie');
 const reviewRouter = require('./router/review');
 const userRouter = require('./router/user');
 const loginRouter = require('./router/login');
+const movieManagerRouter = require('./router/movie-manager');
 const jwt = require('./commons/jwt');
 const settings = require('./hidden');
 const User = require('./model/userModel');
@@ -26,6 +27,7 @@ app.use('/movie', movieRouter);
 app.use('/review', reviewRouter);
 app.use('/user', jwt(['admin']), userRouter);
 app.use('/login', loginRouter);
+app.use('/movie-manager', jwt(['admin']), movieManagerRouter);
 
 app.get('/', (req, res) => {
      res.status(200).send('Hello this our Movie project back end');

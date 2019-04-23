@@ -3,7 +3,8 @@ export interface IUserInfo{
     userid:string,
     username:string,
     roles:string[],    
-    photo?:string
+    photo?:string,
+    exp:any
 };
 
 export interface IAuthState{
