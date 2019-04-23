@@ -23,6 +23,9 @@ import { JWTCanActivate } from './auth/jwt-can-activate';
 import { ErrorService } from './services/errorService';
 import { ErrorComponent } from './error/error.component';
 import { JwtDirective } from './auth/jwt.directive';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatTableModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -42,10 +45,11 @@ import { JwtDirective } from './auth/jwt.directive';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    JwtConfig
+    JwtConfig,MatButtonModule, MatCheckboxModule,MatTableModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},

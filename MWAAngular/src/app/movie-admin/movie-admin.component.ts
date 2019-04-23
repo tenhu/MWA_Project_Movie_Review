@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieManagerService } from '../services/movieManagerService';
 
 @Component({
   selector: 'app-movie-admin',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service:MovieManagerService) { }
 
-  ngOnInit() {
+  private options;
+  movies:{};
+  ngOnInit(): void {
+      this.list(this.options={p:1});
+  }
+
+  list(options){
+    this.service.list(this.options={p:1})
+    .then((result:any) => {
+      this.movies = result;
+    });
+  }
+
+  onPaging(page:number){
+      this.options=Object.assign({}, this.options,{p:page});
+      this.list(this.options);
+  }
+
+  onSearch(q:string){        
+      this.options=Object.assign({},this.options,{p:1,q:q});
+      this.list(this.options);
   }
 
 }
