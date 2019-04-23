@@ -14,6 +14,8 @@ module.exports.addMovie = (req, res, next) => {
   const released = req.body.released;
   const imageUrl = req.body.imageUrl;
   const director = req.body.director;
+  const type = req.body.type;
+  const descripton = req.body.descripton;
 
   const movie = new Movie({
     title: title,
@@ -25,20 +27,22 @@ module.exports.addMovie = (req, res, next) => {
     },
     cinema: {
       cinemas: []
-    }
+    },
+    type: type,
+    descripton: descripton 
   });
   movie
     .save()
     .then(result => {
       console.log('Created Movie');
-      res.status(201).json({ success : 1 });
+      res.status(201).json({ success: 1 });
     })
     .catch(err => {
       console.log(err);
     });
 
-}; 
+};
 
 module.exports.editMovie = (req, rest) => {
-  
+
 }

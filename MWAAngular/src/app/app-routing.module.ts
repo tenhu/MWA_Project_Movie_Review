@@ -16,7 +16,9 @@ const routes: Routes = [
   {path:'admin', children:[{
     path:'movie', component:MovieAdminComponent, data:{roles:'admin'}, canActivate:[JWTCanActivate]
   }]},
-  {path:'signup', component: SignUpComponent}
+  {path:'signup', component: SignUpComponent},
+  {path:'', redirectTo: 'movie', pathMatch: 'full' },
+  {path:'**', redirectTo: 'movie' }
 ];
 
 @NgModule({
