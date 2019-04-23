@@ -8,14 +8,24 @@
 
 
 </div>
+
 <br/>
 <br/>
 
   
-<button style="vertical-align: top" (click)="handleClick($event)">Rate Movie</button>
-<img *ngIf="showmyRate" src="assets/star1.png" style=" height: 20px; width:20px;"/>
-<span class="span2" *ngIf="showmyRate" >{{myRate}}</span>
-  <app-star (hideRate)="this.show= $event" (rateChange)="this.myRate= $event" (showRateNum)="this.showmyRate= $event"    *ngIf="show"> </app-star>
+<button  (click)="handleClick($event)">Rate Movie</button>
 
+<img *ngIf="showmyRate" src="assets/star1.png" style=" height: 20px; width:20px;"/>
+    <span class="span2" *ngIf="showmyRate" >{{myRate}}</span>
+
+<div style="display:inline-block" *ngIf="rateUs">
+    
+
+    <img *ngFor="let star of stars ; let i = index" [src]="myindex>i?'assets/star3.png':'assets/star2.png'" (mouseover)="clicked(i)" (click)="clickedstar(i)" style=" height: 20px; width:20px;"/> 
+  <span>{{myindex}}</span>
+
+  <img src="assets/cancel.png" (click)="clicked2($event)"  style=" height: 20px; width:20px;"/>
+
+    </div>
 
 

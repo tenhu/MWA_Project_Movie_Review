@@ -19,7 +19,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { MovieAdminComponent, ManageMovieFormComponent } from './movie-admin/movie-admin.component';
 import { GetMovieService } from './services/get-movie.service';
-import { StarComponent } from './review/star.component';
 import { MovieDetailsComponent } from './review/movie-details.component';
 import { JWTCanActivate } from './auth/jwt-can-activate';
 import { ErrorService } from './services/errorService';
@@ -40,7 +39,7 @@ import { MaterialModules } from './material-modules';
     LoginStatusComponent,
     LogoutComponent,
     MovieAddEditComponent,
-    HeaderComponent,StarComponent,MovieDetailsComponent,
+    HeaderComponent,MovieDetailsComponent,
     SignUpComponent,
     HeaderComponent,
     MovieAdminComponent,
@@ -63,7 +62,7 @@ import { MaterialModules } from './material-modules';
     LoginService,GetMovieService,
     LoginService,
     JWTCanActivate,
-    ErrorService    
+    ErrorService    ,
   ],
   bootstrap: [AppComponent]
 })
