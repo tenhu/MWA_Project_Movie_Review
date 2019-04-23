@@ -3,7 +3,7 @@ const Movie = require('../model/movieModel');
 
 module.exports.showMovie = (req, res, next) => {
   Movie.find({}, (err, movie) => {
-    console.log(movie);
+    //console.log(movie);
     res.status(201).json(movie);
   });
 };
