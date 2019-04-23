@@ -48,6 +48,9 @@ module.exports.addMovie = (req, res, next) => {
   };
 
 
-}; 
+};
 
 
+module.exports.editMovie = (req, rest) => {
+
+}

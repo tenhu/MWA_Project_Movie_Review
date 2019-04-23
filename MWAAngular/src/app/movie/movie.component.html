@@ -1,18 +1,16 @@
-<<<<<<< HEAD
-=======
+
 <div class="movie-div">
->>>>>>> a681903100f690750c039b70f0937edbc9cf7cfc
   <!-- movie works!  {{movies}}
   -->
     <div *ngFor="let movie of movies" id="movie">
         <img src="{{movie.imageUrl}}" alt="Italian Trulli">
-        
+
         <div id="content">
           <a href="movie/get/{{movie._id}}"> {{movie.title}} </a>
 
           <p>{{movie.type}}</p>
           <p> {{movie.descripton}} </p>
-        </div>  
+        </div>
 </div>
 
 <!-- <app-movie-add-edit></app-movie-add-edit>
