@@ -3,7 +3,7 @@ const router = express.Router();
 
 const review = require('../controller/review');
 
-router.get('/', review.showReview);
+router.patch('/:id', review.reviewUpdate);
 
 
 module.exports = router;

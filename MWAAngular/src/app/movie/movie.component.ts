@@ -19,7 +19,6 @@ export class MovieComponent implements OnInit {
       //console.log('[inside]' + JSON.stringify (movie));
       this.movies = JSON.parse(JSON.stringify( movie));
      });
-    //console.log('[Movies]' + this.movies);
   }
 
 

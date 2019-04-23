@@ -7,6 +7,11 @@ module.exports.showMovie = (req, res, next) => {
     res.status(201).json(movie);
   });
 };
+module.exports.showOneMovie = (req, res, next) => {
+  Movie.find({"_id":req.params.id}).then(function (movie) {
+    console.log(req.params.id)
+    res.send(movie);
+  });
 
 module.exports.addMovie = (req, res, next) => {
 
@@ -40,8 +45,12 @@ module.exports.addMovie = (req, res, next) => {
     .catch(err => {
       console.log(err);
     });
+  };
+
 
 };
+
+
 
 module.exports.editMovie = (req, rest) => {
 
