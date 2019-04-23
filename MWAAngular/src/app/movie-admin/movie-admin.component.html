@@ -1,9 +1,10 @@
 <div>
   <form>
     <mat-form-field>
-        <input matInput placeholder="Search" value="">
-        <button mat-icon-button><mat-icon>search</mat-icon></button>
+        <input matInput placeholder="Search" value="" #q>
     </mat-form-field>
+    <button mat-icon-button	 (click)="onSearch(q.value)"><mat-icon aria-label="Search">search</mat-icon></button>
+    <button mat-icon-button	 (click)="onAdd()"><mat-icon aria-label="Add Movie">add</mat-icon></button>
   </form>
 <table mat-table [dataSource]="movies.docs" class="mat-elevation-z8">
 

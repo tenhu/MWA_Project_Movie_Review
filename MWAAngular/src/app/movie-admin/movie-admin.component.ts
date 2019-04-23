@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieManagerService } from '../services/movieManagerService';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
 import { toTypeScript } from '@angular/compiler';
 
 @Component({
@@ -10,10 +10,10 @@ import { toTypeScript } from '@angular/compiler';
 })
 export class MovieAdminComponent implements OnInit {
 
-  constructor(private service:MovieManagerService) { }
+  constructor(public dialog: MatDialog, private service:MovieManagerService) { }
 
   private options;
-  movies:{};
+  movies={};
   ngOnInit(): void {
       this.list({p:1});
   }
@@ -22,7 +22,7 @@ export class MovieAdminComponent implements OnInit {
     this.options = options;
     this.service.list(this.options={p:1})
     .then((result:any) => {
-      this.movies = result;
+      this.movies = result != null?result:{};
     }).catch((err)=>{
       this.movies={};
     });
@@ -35,4 +35,25 @@ export class MovieAdminComponent implements OnInit {
   onSearch(q:string){        
       this.list(Object.assign({},this.options,{p:1,q:q}));
   }
+
+  onAdd(){
+    const dialogRef = this.dialog.open(ManageMovieFormComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+}
+
+
+
+@Component({
+  selector: 'app-manage-movie-form',
+  templateUrl: './manage-movie-form.component.html',
+})
+export class ManageMovieFormComponent implements OnInit {
+  ngOnInit(): void {
+  }
+
 }
