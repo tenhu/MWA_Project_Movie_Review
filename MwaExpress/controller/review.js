@@ -11,19 +11,20 @@ const index = req.body.index;
     var review = { userName: userName, rate: rate , comment: comment };
 
 
-  if(index === 1)
-  {
-    Movie.update(
-     { _id: id ,"review.reviews.userName":userName}, 
-     { $set: { "review.reviews.$.rate" : rate ,"review.reviews.$.comment" : comment }},
-    function (error, success) {
-          if (error) {
-              console.log(error);
-          } else {
-              console.log(success);
-          }
-      });
-     }
+    if(index === 1)
+    {
+      Movie.update(
+       { _id: id ,"review.reviews.userName":userName}, 
+       { $set: { "review.reviews.$.rate" : rate ,"review.reviews.$.comment" : comment }},
+      function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+        });
+       }
+       
      else
      {
 
@@ -32,7 +33,7 @@ const index = req.body.index;
      { $push: { "review.reviews": review  } },
     function (error, success) {
           if (error) {
-              console.log(error);
+              console.log("faillllllled");
           } else {
               console.log(success);
           }
