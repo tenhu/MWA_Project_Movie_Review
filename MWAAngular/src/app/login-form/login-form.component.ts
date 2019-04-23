@@ -4,6 +4,7 @@ import { LoginService } from '../services/loginService';
 import { authStore } from '../auth/auth-store';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthActions } from '../auth/auth-actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,7 @@ export class LoginFormComponent implements OnInit {
   myform:FormGroup;
   loginsucceeded = false;
   errors:[];
-  constructor(private fb:FormBuilder, private loginService:LoginService,private jwtHelper: JwtHelperService) {
+  constructor(private fb:FormBuilder, private loginService:LoginService,private jwtHelper: JwtHelperService, private router: Router) {
     this.myform = this.fb.group({
       'username':['',Validators.required],
       'password':['',Validators.required]
@@ -34,6 +35,8 @@ export class LoginFormComponent implements OnInit {
           authStore.dispatch(AuthActions.login(userinfo));
           this.errors = [];
           this.loginsucceeded = true;
+          this.router.navigate(['/']);
+
         }else{
           this.errors = res.error;
         }

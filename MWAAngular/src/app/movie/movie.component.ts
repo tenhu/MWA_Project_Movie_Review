@@ -9,7 +9,7 @@ import {MovieService} from '../services/movie.service';
 })
 export class MovieComponent implements OnInit {
 
-  private movies;
+  movies;
   constructor(private movieService: MovieService) {
 
    }
@@ -19,7 +19,6 @@ export class MovieComponent implements OnInit {
       //console.log('[inside]' + JSON.stringify (movie));
       this.movies = JSON.parse(JSON.stringify( movie));
      });
-    //console.log('[Movies]' + this.movies);
   }
 
 

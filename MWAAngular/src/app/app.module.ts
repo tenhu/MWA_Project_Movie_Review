@@ -18,6 +18,9 @@ import { MovieAddEditComponent } from './movie/movie-add-edit/movie-add-edit.com
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { MovieAdminComponent, ManageMovieFormComponent } from './movie-admin/movie-admin.component';
+import { GetMovieService } from './services/get-movie.service';
+import { StarComponent } from './review/star.component';
+import { MovieDetailsComponent } from './review/movie-details.component';
 import { JWTCanActivate } from './auth/jwt-can-activate';
 import { ErrorService } from './services/errorService';
 import { ErrorComponent } from './error/error.component';
@@ -37,6 +40,7 @@ import { MaterialModules } from './material-modules';
     LoginStatusComponent,
     LogoutComponent,
     MovieAddEditComponent,
+    HeaderComponent,StarComponent,MovieDetailsComponent,
     SignUpComponent,
     HeaderComponent,
     MovieAdminComponent,
@@ -56,6 +60,7 @@ import { MaterialModules } from './material-modules';
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:ApiUrlInterceptor, multi:true},
     Configurations,
+    LoginService,GetMovieService,
     LoginService,
     JWTCanActivate,
     ErrorService    

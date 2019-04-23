@@ -1,0 +1,19 @@
+span {
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: bold;
+    vertical-align: top;    
+  }
+  img{
+    margin-left: 10px;
+
+  }
+  app-star{
+    margin-left: 15px;
+ 
+  }
+
+  .span2 {
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: bold;
+    vertical-align: middle;    
+  }
