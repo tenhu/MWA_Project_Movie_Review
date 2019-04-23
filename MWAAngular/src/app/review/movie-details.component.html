@@ -37,7 +37,7 @@
         <textarea [ngClass]="{'has-error':!myform.get('comment1').valid}"   placeholder="Write your comment here!" class="form-control" id="comment1" name="comment1" formControlName="comment1"></textarea>
            <div  class="alert alert-danger"  *ngIf="myform?.controls.comment1?.errors?.required ">comment is required to Submit.</div>
 
-           <button  type="submit" class="btn btn-default" [disabled]="!myform.valid">Submit</button>
+           <button  type="submit" class="btn btn-primary" [disabled]="!myform.valid">Submit</button>
 
 </form>
 
