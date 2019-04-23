@@ -1,3 +1,40 @@
-<p>
-  manage-movie-form works!
-</p>
+<form form-container [formGroup]="form">
+    <mat-card-content class="form-container">
+      <mat-form-field>
+        <input matInput placeholder="Title:" name="title" 
+            formControlName="title" [ngModel]="movie.title"/>
+        <mat-error *ngIf="hasError('title','required')">Title is required.</mat-error>
+      </mat-form-field>      
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Released:" name="released" 
+            formControlName="released" [ngModel]="movie.released"/>
+          <mat-error *ngIf="hasError('released','required')">Released is required.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Image:" name="imageUrl" 
+                formControlName="imageUrl"  [ngModel]="movie.imageUrl"/>
+          <mat-error *ngIf="hasError('imageUrl','required')">Image is required.</mat-error>
+      </mat-form-field>  
+      <mat-form-field>
+          <input matInput placeholder="Director:" name="director" 
+                formControlName="director"  [ngModel]="movie.director"/>
+          <mat-error *ngIf="hasError('director','required')">Director is required.</mat-error>
+      </mat-form-field>    
+      <mat-form-field>
+          <input matInput placeholder="Type:" name="type"
+             formControlName="type"   [ngModel]="movie.type"/>
+          <mat-error *ngIf="hasError('type','required')">Type is required.</mat-error>
+      </mat-form-field>  
+      <mat-form-field>
+          <textarea matInput placeholder="Descriptions:" 
+            formControlName="descripton"   [ngModel]="movie.descripton">
+         </textarea>          
+         <mat-error *ngIf="hasError('descripton','required')">Description is required.</mat-error>
+      </mat-form-field>                             
+  </mat-card-content>
+  <mat-card-actions>
+      <button mat-stroked-button (click)="onSave(true)" color="primary" [disabled]="!form.valid">Save & Close</button>
+      <button mat-stroked-button (click)="onSave(false)" color="primary" [disabled]="!form.valid">Save</button>
+      <button mat-stroked-button (click)="onCancel()">Cancel</button>
+  </mat-card-actions>
+</form>

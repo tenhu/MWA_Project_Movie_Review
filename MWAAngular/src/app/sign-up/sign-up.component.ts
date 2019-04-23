@@ -22,7 +22,10 @@ export class SignUpComponent implements OnInit {
       'name':['',Validators.required]
     });         
    }
-
+   hasError(field, rule){
+    return this.myform.get(field).hasError(rule)
+          && this.myform.get(field).touched
+  }
   ngOnInit() {
   }
 

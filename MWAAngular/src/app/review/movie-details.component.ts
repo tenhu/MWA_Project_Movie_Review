@@ -3,7 +3,9 @@ import { GetMovieService } from '../services/get-movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ReviewComponent } from './review.component';
+import { authStore } from '../auth/auth-store';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-movie-details',
@@ -17,8 +19,9 @@ mymovie;
 showCinema = false
 myform:FormGroup;
 
-newvote:boolean = true;
+  newvote: boolean = true;
 
+  userinfo;
 
 movie_id;
 movie_title;
@@ -36,16 +39,14 @@ rateStar = 0;
 currentUserReview;
 current_userTest
 
-movie_AvgRate:number = 0;
+  movie_AvgRate: number = 0;
 
 
 
-  constructor(private movie:GetMovieService,private route:ActivatedRoute,private fb:FormBuilder) { 
-this.current_userTest = "salem22";
-
+  constructor(private movie: GetMovieService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
     this.myform = this.fb.group({
-        'comment1':['',Validators.required],
-      });    
+      'comment1': ['', Validators.required],
+    });
   }
 
   onSubmit ():void {
@@ -68,11 +69,11 @@ this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comm
 
         this.movie_comments = this.movie_comments.filter(comment => comment.userName !== this.current_userTest);        
 
-        this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comment:this.myform.controls['comment1'].value})   
+        this.movie_comments.push({ userName: this.current_userTest, rate: this.rateStar, comment: this.myform.controls['comment1'].value })
 
+      }
     }
-    }
-}
+  }
 
 
   cinemaShow(e:Event)
@@ -82,17 +83,25 @@ this.movie_comments.push({userName:this.current_userTest,rate:this.rateStar,comm
   }
 
 
-  hideCenima(e:Event)
-  {
+  hideCenima(e: Event) {
     this.showCinema = false;
   }
 
 
- 
   ngOnInit() {
 
+    this.userinfo = authStore.getState().userinfo;
+    if(!this.userinfo.username) {
+      console.log('not logged in');
+      this.router.navigate(['/login']);
 
-    this.route.params.subscribe(params=> this.movie_id = params['id'])
+    } 
+
+
+    this.current_userTest = this.userinfo.username;
+    console.log('[part:] '+ this.userinfo.username);
+
+    this.route.params.subscribe(params => this.movie_id = params['id'])
     console.log(this.movie_id)
     this.movie.getMovieData(this.movie_id).then(movie => {
         console.log('[inside]' + JSON.stringify (movie));
@@ -139,7 +148,7 @@ this.xurrentComment = this.currentUserReview.comment
       else
       {
           this.newvote = true;
-      }
+        }
 
 
 }
@@ -150,12 +159,18 @@ else
 
 
 
-       });    
-     
+    });
+
 
   }
 
-  parentHandleClick(e)
+  parentHandleClick(e) {
+    this.rateStar = e;
+    console.log(e)
+    if (this.newvote) {
+      this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => console.log(data));
+    }
+    else {
 
   {
 this.rateStar = e;
@@ -170,11 +185,12 @@ else
 
     this.movie.reviewUpdate(this.movie_id,this.current_userTest,this.rateStar,this.xurrentComment,1).then(data=>console.log(data));
 
-}
-    
 
   }
 
 
 
+}
+    }
+  }
 }
