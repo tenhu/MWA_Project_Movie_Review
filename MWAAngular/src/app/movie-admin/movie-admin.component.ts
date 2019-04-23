@@ -20,6 +20,8 @@ export class MovieAdminComponent implements OnInit {
 
   private options;
   movies={};
+  displayedColumns: string[] = ['title', 'released', 'director','type', 'descripton','actions'];
+
   ngOnInit(): void {
       this.list({p:1});
   }
@@ -30,7 +32,7 @@ export class MovieAdminComponent implements OnInit {
 
   list(options){
     this.options = options;
-    this.service.list(this.options={p:1})
+    this.service.list(this.options)
     .then((result:any) => {
       this.movies = result != null?result:{};
     }).catch((err)=>{
@@ -39,7 +41,7 @@ export class MovieAdminComponent implements OnInit {
   }
 
   onPaging(page:PageEvent){
-      this.list(Object.assign({}, this.options,{p:page.pageIndex}));
+      this.list(Object.assign({}, this.options,{p:page.pageIndex + 1}));
   }
 
   onSearch(q:string){        
@@ -95,6 +97,7 @@ export class ManageMovieFormComponent implements OnInit {
   form:FormGroup;
   movieid:any = null;
   locking = false;
+  newobject = false;
   constructor(
     private dialogRef: MatDialogRef<ManageMovieFormComponent>,
     public dialog: MatDialog,
@@ -109,9 +112,9 @@ export class ManageMovieFormComponent implements OnInit {
       this.form = this.fb.group({
         'title': ['', Validators.required],
         'released': ['', Validators.required],
-        'imageurl': ['', Validators.required],
+        'imageUrl': ['', Validators.required],
         'director': ['', Validators.required],
-        'description':['', Validators.required],
+        'descripton':['', Validators.required],
         'type':['', Validators.required]
       });  
     }
@@ -137,9 +140,9 @@ export class ManageMovieFormComponent implements OnInit {
       return {
         title:this.form.controls['title'].value,
         released:this.form.controls['released'].value,
-        imageurl:this.form.controls['imageurl'].value,
+        imageUrl:this.form.controls['imageUrl'].value,
         director:this.form.controls['director'].value,
-        description:this.form.controls['description'].value,
+        descripton:this.form.controls['descripton'].value,
         type:this.form.controls['type'].value
       }
     }    
@@ -152,13 +155,18 @@ export class ManageMovieFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSave(){
+  onSave(closeAfterSave){
       let p=this.movieid!=null?
       this.service.update(this.movieid, this.getMovieFromForm()):
       this.service.add(this.getMovieFromForm());
       p.then((saveres:any)=>{
         if(saveres.succeeded){
-          this.dialogRef.close(true);
+          if(closeAfterSave){
+            this.dialogRef.close(true);
+          }else{
+            this.movieid = saveres.data._id;
+            this.newobject = true;
+          }
         }else{
           this.dialog.open(ConfirmDialogComponent,
             {data:{message:'Saving faield', buttons:'okonly', icon:'error'}});        
@@ -169,9 +177,9 @@ export class ManageMovieFormComponent implements OnInit {
           {data:{message:'Server error', buttons:'okonly', icon:'error'}});
       })
       .finally(()=>this.locking = false);
-  }
+  }  
 
   onCancel(){
-    this.dialogRef.close();
+    this.dialogRef.close(this.newobject);
   }
 }

@@ -24,8 +24,7 @@ const movieSchema = new Schema({
     review: {
         reviews: [
             {
-                userName: { type: String, require: true,  unique:true
-                },
+                userName: { type: String, require: true,  unique:true, sparse: true },
                 rate: { type: Number, require: true },
                 comment: { type: String, require: true }
             }

@@ -1,8 +1,7 @@
-<form *ngIf="!signupsucceeded" form-container [formGroup]="myform" (ngSubmit)="onSignup()">
+<form *ngIf="!signupsucceeded" class="form-container" [formGroup]="myform" (ngSubmit)="onSignup()">
     <mat-card-content class="form-container">
-
       <mat-form-field>
-        <input matInput type="text" matInput placeholder="Username:" id="username" name="username" formControlName="username">
+        <input matInput type="text" placeholder="Username:" id="username" name="username" formControlName="username">
         <mat-error *ngIf="hasError('username','required')">Username is required.</mat-error>
         <mat-error *ngIf="hasError('username','minlength')">Username require at least 3 characters.</mat-error>
         <mat-error *ngIf="hasError('username','used')">This username was used.</mat-error>
