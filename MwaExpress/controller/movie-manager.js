@@ -1,4 +1,3 @@
-const {ObjectId} = require('mongodb');
 const Movie = require('../model/movieModel');
 const itemperpage = 20;
 const log = require('log4node');
@@ -16,6 +15,22 @@ module.exports.list=(req,res,next)=>{
         log.error(err);
         next("Query failed");
     });
+};
+
+module.exports.get=(req,res,next)=>{
+  let id = req.params.id;
+  Movie.findById(id)
+  .then((m)=>{
+    if(m!=null){
+      res.status(200).json({succeeded:true, data:m});
+    }else{
+      res.status(400).json({error:"Movie not found"});
+    }
+  })
+  .catch((err)=>{
+      log.error(err);
+      next("Query failed");
+  });
 };
 
 module.exports.add=(req,res,next)=>{
@@ -47,7 +62,7 @@ module.exports.add=(req,res,next)=>{
 
 module.exports.update = (req,res,next)=>{
     let id = req.params.id;
-    Movie.findOneAndUpdate({_id:ObjectId(id)},{
+    Movie.findByIdAndUpdate(id,{
         title: req.body.title,
         released: req.body.released,
         imageUrl: req.body.imageUrl,
@@ -62,14 +77,14 @@ module.exports.update = (req,res,next)=>{
             if(doc!=null){
                 res.status(200).json({succeeded:true});
             }else{
-                next({code:404,message:"Document not foud"});
+                next({code:404,message:"Movie not foud"});
             }
           }
       });
 };
 
 module.exports.delete = (req,res,next)=>{
-    Movie.findOneAndDelete({_id:ObjectId(id)},
+    Movie.findByIdAndDelete(id,
         (err,doc)=>{
             if(err){
                 log.error(err);
@@ -78,7 +93,7 @@ module.exports.delete = (req,res,next)=>{
                 if(doc!=null){
                     res.status(200).json({succeeded:true});
                 }else{
-                    next({code:404,message:"Document not foud"});
+                    next({code:404,message:"Movie not foud"});
                 }
               }    
         });

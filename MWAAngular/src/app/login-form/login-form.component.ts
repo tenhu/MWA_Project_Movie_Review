@@ -23,6 +23,11 @@ export class LoginFormComponent implements OnInit {
     });        
   }
 
+  hasError(field, rule){
+    return this.myform.get(field).hasError(rule)
+          && this.myform.get(field).touched
+  }
+  
   onLogin ():void {
     if(this.myform.valid){
       this.loginService.doLogin(

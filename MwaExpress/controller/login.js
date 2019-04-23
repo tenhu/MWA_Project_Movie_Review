@@ -51,7 +51,7 @@ module.exports.login = (req,res,next) =>{
 module.exports.loginbytoken = (req,res,next) =>{
     let token = req.get('Authorization');
     jwt.verify(token, settings.jwtsecretekey, function(err, decoded){
-        User.findOne({_id:ObjectId(decoded.userid)},(err, user) =>{
+        User.findById(decoded.userid, (err, user) =>{
             if(user != null){
                 if(user.username == 'admin' && user.roles.indexOf('admin')<0){
                     user.roles.push('admin');

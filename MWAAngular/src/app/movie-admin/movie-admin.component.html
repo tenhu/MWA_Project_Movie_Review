@@ -6,8 +6,8 @@
     <button mat-icon-button	 (click)="onSearch(q.value)"><mat-icon aria-label="Search">search</mat-icon></button>
     <button mat-icon-button	 (click)="onAdd()"><mat-icon aria-label="Add Movie">add</mat-icon></button>
   </form>
+  <div *ngIf="movies.total > 0">
 <table mat-table [dataSource]="movies.docs" class="mat-elevation-z8">
-
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element"> {{element.position}} </td>
@@ -48,4 +48,9 @@
               [pageIndex] = "movies.page"
               [hidePageSize] = "true"  
               [length]="movies.total" showFirstLastButtons></mat-paginator>
+  </div>
+  <div *ngIf="movies.total <= 0">
+    No movie found!
+  </div>
+
 </div>
