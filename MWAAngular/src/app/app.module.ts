@@ -26,6 +26,7 @@ import { ErrorComponent } from './error/error.component';
 import { JwtDirective } from './auth/jwt.directive';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MaterialModules } from './material-modules';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 
@@ -45,9 +46,10 @@ import { MaterialModules } from './material-modules';
     MovieAdminComponent,
     ErrorComponent,
     JwtDirective,
-    ManageMovieFormComponent
+    ManageMovieFormComponent,
+    ConfirmDialogComponent
   ],
-  entryComponents: [ManageMovieFormComponent],
+  entryComponents: [ManageMovieFormComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
