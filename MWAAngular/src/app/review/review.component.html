@@ -1,31 +1,30 @@
-<div style="display:inline-block" >
+<div style="display:inline-block">
 
-  <img src="assets/star1.png" style=" vertical-align: top;   height: 20px; width:20px;"/>
-<span>{{avgRate}}</span>
+  <img src="assets/star1.png" style=" vertical-align: top;   height: 20px; width:20px;" />
+  <span>{{avgRate}}</span>
 
-<img src="assets/views.png" style="  vertical-align: top; height: 20px; width:20px;"/>
-<span> {{views}}</span>
+  <img src="assets/views.png" style="  vertical-align: top; height: 20px; width:20px;" />
+  <span> {{views}}</span>
 
 
 </div>
 
-<br/>
-<br/>
+<br />
+<br />
 
-  
-<button  (click)="handleClick($event)">Rate Movie</button>
 
-<img *ngIf="showmyRate" src="assets/star1.png" style=" height: 20px; width:20px;"/>
-    <span class="span2" *ngIf="showmyRate" >{{myRate}}</span>
+<button (click)="clickRateAction($event)">Rate Movie</button>
+
+<img *ngIf="showmyRate" src="assets/star1.png" style=" height: 20px; width:20px;" />
+<span class="span2" *ngIf="showmyRate">{{myRate}}</span>
 
 <div style="display:inline-block" *ngIf="rateUs">
-    
 
-    <img *ngFor="let star of stars ; let i = index" [src]="myindex>i?'assets/star3.png':'assets/star2.png'" (mouseover)="clicked(i)" (click)="clickedstar(i)" style=" height: 20px; width:20px;"/> 
+
+  <img *ngFor="let star of stars ; let i = index" [src]="myindex>i?'assets/star3.png':'assets/star2.png'"
+    (mouseover)="mouseOverAction(i)" (click)="selectRate(i)" style=" height: 20px; width:20px;" />
   <span>{{myindex}}</span>
 
-  <img src="assets/cancel.png" (click)="clicked2($event)"  style=" height: 20px; width:20px;"/>
+  <img src="assets/cancel.png" (click)="cancelAction($event)" style=" height: 20px; width:20px;" />
 
-    </div>
-
-
+</div>

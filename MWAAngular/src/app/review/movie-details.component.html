@@ -1,61 +1,63 @@
+<div id="cinema" *ngIf="showCinema">
+  <img src="assets/cancel.png" (click)="hideCenima($event)" style=" height: 20px; width:20px;" />
 
-<div id = "cinema" *ngIf="showCinema">
-        <img src="assets/cancel.png" (click)="hideCenima($event)"  style=" height: 20px; width:20px;"/>
+  <div *ngFor="let cinema of movie_cinemas ; let i = index" class="boxxcinema">
+    <img class="img2" src="assets/popcorn.png" alt="Smiley face">
+    {{cinema.cinemaName}}
 
-    <div *ngFor="let cinema of movie_cinemas ; let i = index" class="boxxcinema">
-        <img class="img2" src="assets/popcorn.png"  alt="Smiley face" >
-        {{cinema.cinemaName}}
-        
-      </div>
-      
-                
-               
   </div>
-  <div id="movie">
 
-<button (click)=cinemaShow($event)>Watch in Theater</button>
-  </div>
+
+
+</div>
+<div id="movie">
+
+  <button (click)=cinemaShow($event)>Watch in Theater</button>
+</div>
 <div id="movie">
 
   <a href="#">
     <img src="{{movie_image}}" alt="">
   </a>
-  
+
   <div id="content">
 
-      <h1>{{movie_title}} <span>{{movie_release}}</span></h1>
-      <p>{{movie_type}}</p>
-      <p> {{movie_desc}} </p>
-      <p> Director: {{movie_dire}} </p>
-      
-      <app-review  (rateChange)="parentHandleClick($event)"    currentRate={{rateStar}}  [avgRate]="movie_AvgRate"  [views]="movie_views" > </app-review>
-      <br>
-      <br>
+    <h1>{{movie_title}} <span>{{movie_release}}</span></h1>
+    <p>{{movie_type}}</p>
+    <p> {{movie_desc}} </p>
+    <p> Director: {{movie_dire}} </p>
 
-      
-<form  [formGroup]="myform" (ngSubmit)="onSubmit()">
-        <textarea [ngClass]="{'has-error':!myform.get('comment1').valid}"   placeholder="Write your comment here!" class="form-control" id="comment1" name="comment1" formControlName="comment1"></textarea>
-           <div  class="alert alert-danger"  *ngIf="myform?.controls.comment1?.errors?.required ">comment is required to Submit.</div>
+    <app-review (rateChange)="parentHandleClick($event)" currentRate={{rateStar}} [avgRate]="movie_AvgRate"
+      [views]="movie_views"> </app-review>
+    <br>
+    <br>
 
-           <button  type="submit" class="btn btn-primary" [disabled]="!myform.valid">Submit</button>
 
-</form>
+    <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+      <textarea [ngClass]="{'has-error':!myform.get('comment1').valid}" placeholder="Write your comment here!"
+        class="form-control" id="comment1" name="comment1" formControlName="comment1"></textarea>
+      <div class="alert alert-danger" *ngIf="myform?.controls.comment1?.errors?.required ">comment is required to
+        Submit.</div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!myform.valid">Submit</button>
+
+    </form>
 
   </div>
 
 </div>
 
-<h1 id = "comment">Comments</h1>
+<h1 id="comment">Comments</h1>
 
-<div id = "comment">
-    <div *ngFor="let userComment of movie_comments ; let i = index" class="boxx">
-        <img class="img2" src="http://mumstudents.org/~986610/Hw2/critic.gif"  alt="Smiley face" >
-        {{userComment.userName}}
-        :
+<div id="comment">
+  <div *ngFor="let userComment of movie_comments ; let i = index" class="boxx">
+    <img class="img2" src="http://mumstudents.org/~986610/Hw2/critic.gif" alt="Smiley face">
+    {{userComment.userName}}
+    :
 
-        {{userComment.comment}}
-      </div>
-      
-                
-               
+    {{userComment.comment}}
   </div>
+
+
+
+</div>
