@@ -10,7 +10,7 @@ export class MovieService {
   }
 
   addMovie(title: string, released: string, imageUrl: string, director:string ){
-    return this.http.post('http://localhost:3000/movie',{
+    return this.http.post('<api>movie',{
       "title": title,
       "released": released,
       "imageUrl": imageUrl,
@@ -19,7 +19,7 @@ export class MovieService {
   }  
 
   getMovies() {
-    return this.http.get('http://localhost:3000/movie').toPromise();
+    return this.http.get('<api>movie').toPromise();
   }   
 
 }

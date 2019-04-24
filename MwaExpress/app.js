@@ -23,11 +23,11 @@ mongoose.connect(settings.mongodb.connectionstring).then(result => {
 app.use(cors());
 app.use(bodyParser.json()); 
 
-app.use('/movie', movieRouter);
-app.use('/review', reviewRouter);
-app.use('/user', jwt(['admin']), userRouter);
-app.use('/login', loginRouter);
-app.use('/movie-manager', jwt(['admin']), movieManagerRouter);
+app.use('/api/movie', movieRouter);
+app.use('/api/review', reviewRouter);
+app.use('/api/user', jwt(['admin']), userRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/movie-manager', jwt(['admin']), movieManagerRouter);
 
 app.get('/', (req, res) => {
      res.status(200).send('Hello this our Movie project back end');

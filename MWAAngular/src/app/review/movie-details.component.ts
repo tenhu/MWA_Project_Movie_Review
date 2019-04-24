@@ -94,19 +94,19 @@ export class MovieDetailsComponent implements OnInit,OnChanges {
 
     this.userinfo = authStore.getState().userinfo;
     if (!this.userinfo.username) {
-      console.log('not logged in');
+     // console.log('not logged in');
       this.router.navigate(['/login']);
 
     }
 
     this.current_userTest = this.userinfo.username;
-    console.log('[part:] ' + this.userinfo.username);
+//    console.log('[part:] ' + this.userinfo.username);
 
     this.route.params.subscribe(params => this.movie_id = params['id'])
     this.movie.getMovieData(this.movie_id).then(movie => {
-      console.log('[inside]' + JSON.stringify(movie));
+      //console.log('[inside]' + JSON.stringify(movie));
       this.mymovie = JSON.parse(JSON.stringify(movie));
-      console.log(this.mymovie)
+   //   console.log(this.mymovie)
 
       this.movie_title = this.mymovie[0].title;
       this.movie_desc = this.mymovie[0].descripton;
@@ -151,7 +151,7 @@ export class MovieDetailsComponent implements OnInit,OnChanges {
 
   parentHandleClick(e) {
     this.rateStar = e;
-    console.log(e)
+    //console.log(e)
     if (this.newvote) {
       this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => this.newvote = false);
     }

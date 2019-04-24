@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetMovieService {
   getMovieData(id:string){
-   return this.http.get("http://localhost:3000/movie/"+id).toPromise();
+   return this.http.get("<api>movie/"+id).toPromise();
     
   
     }
  
     reviewUpdate(id: string, username: string, rate: number, comment:string ,index:number ){
-      return this.http.patch('http://localhost:3000/review'+"/"+id,{
+      return this.http.patch('<api>review'+"/"+id,{
         "index":index,
         "userName": username,
         "rate": rate,

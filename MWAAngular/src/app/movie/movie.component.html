@@ -6,8 +6,8 @@
         <img src="{{movie.imageUrl}}" alt="Italian Trulli">
 
         <div id="content">
-          <a href="movie/get/{{movie._id}}"> {{movie.title}} </a>
 
+          <a [routerLink]="['/movie/get/'+ movie._id ]"> {{movie.title}} </a>
           <p>{{movie.type}}</p>
           <p> {{movie.descripton}} </p>
         </div>
