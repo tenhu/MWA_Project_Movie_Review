@@ -12,14 +12,18 @@ import { Router } from '@angular/router';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
-export class MovieDetailsComponent implements OnInit {
-  rateUs = false;
 
+export class MovieDetailsComponent implements OnInit,OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.myform.controls['comment1'].setValue(this.currentUserReview.comment)
+  }
+
+  rateUs = false;
   mymovie;
   showCinema = false
   myform: FormGroup;
 
-  newvote: boolean = true;
+  newvote;
 
   userinfo;
 
@@ -44,6 +48,8 @@ export class MovieDetailsComponent implements OnInit {
 
 
   constructor(private movie: GetMovieService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
+    this.movie_comments = []
+
     this.myform = this.fb.group({
       'comment1': ['', Validators.required],
     });
@@ -51,23 +57,21 @@ export class MovieDetailsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.myform.valid) {
-      console.log(this.myform.controls['comment1'].value)
-      console.log(this.newvote)
-      if (this.newvote) {
-        this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.myform.controls['comment1'].value, 2).then(data => console.log(data));
-        console.log("Set")
-        this.newvote = false;
-        this.movie_comments.push({ userName: this.current_userTest, rate: this.rateStar, comment: this.myform.controls['comment1'].value })
+      if (this.newvote === true) {
+     
+
+        this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.myform.controls['comment1'].value, 2).then(data => this.newvote = false) ;
+        this.movie_comments.unshift({ userName: this.current_userTest, rate: this.rateStar, comment: this.myform.controls['comment1'].value })
 
       }
       else {
+        
         this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.myform.controls['comment1'].value, 1).then(data => console.log(data));
 
-        console.log("push")
 
         this.movie_comments = this.movie_comments.filter(comment => comment.userName !== this.current_userTest);
 
-        this.movie_comments.push({ userName: this.current_userTest, rate: this.rateStar, comment: this.myform.controls['comment1'].value })
+        this.movie_comments.unshift({ userName: this.current_userTest, rate: this.rateStar, comment: this.myform.controls['comment1'].value })
 
       }
     }
@@ -86,6 +90,7 @@ export class MovieDetailsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.newvote = true;
 
     this.userinfo = authStore.getState().userinfo;
     if (!this.userinfo.username) {
@@ -94,15 +99,14 @@ export class MovieDetailsComponent implements OnInit {
 
     }
 
-
     this.current_userTest = this.userinfo.username;
     console.log('[part:] ' + this.userinfo.username);
 
     this.route.params.subscribe(params => this.movie_id = params['id'])
-    console.log(this.movie_id)
     this.movie.getMovieData(this.movie_id).then(movie => {
       console.log('[inside]' + JSON.stringify(movie));
       this.mymovie = JSON.parse(JSON.stringify(movie));
+      console.log(this.mymovie)
 
       this.movie_title = this.mymovie[0].title;
       this.movie_desc = this.mymovie[0].descripton;
@@ -119,41 +123,29 @@ export class MovieDetailsComponent implements OnInit {
           return accumulator + view.rate;
         }, 0);
         this.movie_AvgRate = Math.round(totalrates / this.movie_views * 10) / 10;
-        console.log(this.movie_AvgRate);
 
         this.movie_comments = this.mymovie[0].review.reviews;
         this.movie_comments = this.movie_comments.filter(comment => comment.comment.trim() !== "");
 
-        console.log(this.movie_comments);
-        console.log(this.current_userTest);
-
         var currReview = this.mymovie[0].review.reviews.filter(review => review.userName === this.current_userTest);
-        console.log(currReview)
-        if (currReview.length !== 0) {
+        if (currReview.length >0) {
           this.newvote = false;
-
           this.currentUserReview = currReview[0];
-          console.log(this.currentUserReview);
 
           this.myform.controls['comment1'].setValue(this.currentUserReview.comment)
           this.rateStar = this.currentUserReview.rate
-          console.log(this.rateStar);
           this.xurrentComment = this.currentUserReview.comment
         }
         else {
           this.newvote = true;
         }
 
-
       }
       else {
         this.movie_comments = []
       }
 
-
-
     });
-
 
   }
 
@@ -161,27 +153,12 @@ export class MovieDetailsComponent implements OnInit {
     this.rateStar = e;
     console.log(e)
     if (this.newvote) {
-      this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => console.log(data));
+      this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => this.newvote = false);
     }
-    else {
-
-      {
-        this.rateStar = e;
-        console.log(e)
-        if (this.newvote) {
-          this.newvote = false;
-          this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => console.log(data));
-        }
         else {
 
           this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.xurrentComment, 1).then(data => console.log(data));
 
-
         }
-
-
-
-      }
-    }
   }
 }

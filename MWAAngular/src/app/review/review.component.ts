@@ -10,8 +10,16 @@ export class ReviewComponent implements OnInit,OnChanges {
   @Input() currentRate:number;
   rateUs:boolean = false
 showmyRate:boolean = false
+@Input() views:String;
+@Input() avgRate:String;
+@Output() rateChange = new EventEmitter();
+myindex = 1;
+myRate=0;
+stars = new Array(10);
+  
 
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+
+ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
 
     if(this.currentRate > 0)
     {
@@ -20,28 +28,16 @@ showmyRate:boolean = false
       this.showmyRate = true;
     }
   }
-  stars = new Array(10);
+  
     
-  myindex = 1;
-
-
-@Input() views:String;
-@Input() avgRate:String;
-@Output() rateChange = new EventEmitter();
-
-
-myRate=0;
-
-
-
 constructor() {}
   ngOnInit() {
 
   }
 
-  clicked2(event:Event) {
+
+  cancelAction(event:Event) {
     
-    console.log("left")
     this.rateChange.emit(1)
 
     this.showmyRate = false
@@ -51,12 +47,12 @@ constructor() {}
 
   }
 
-  clicked(index) {
+  mouseOverAction(index) {
     
     this.myindex = index+1;
       }
 
-  clickedstar(index) {
+  selectRate(index) {
       
 this.myindex = index+1
 this.rateChange.emit(this.myindex)
@@ -68,7 +64,7 @@ this.showmyRate = true
   
  
 
-  handleClick(event: Event) {
+  clickRateAction(event: Event) {
   this.rateUs = true;
   this.showmyRate = false
 
