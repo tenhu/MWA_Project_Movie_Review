@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MovieManagerService } from '../services/movieManagerService';
-import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { PageEvent, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
@@ -16,7 +16,7 @@ interface MovieDialogData {
 })
 export class MovieAdminComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private service:MovieManagerService) { }
+  constructor(public dialog: MatDialog, private service:MovieManagerService, private snackBar: MatSnackBar) { }
 
   private options;
   movies : any;
@@ -80,7 +80,8 @@ export class MovieAdminComponent implements OnInit {
       if(result!=null){
         this.service.delete(movieId).then((deleteres:any)=>{
           if(deleteres.succeeded){
-            this.refresh();        
+            this.refresh(); 
+            this.snackBar.open('Movie deleted successfully','',{duration: 2000});
           }
         });
       }
@@ -105,7 +106,8 @@ export class ManageMovieFormComponent implements OnInit {
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) 
     private data: MovieDialogData, private service:MovieManagerService,
-    private fb:FormBuilder) {    
+    private fb:FormBuilder,
+    private snackBar: MatSnackBar) {    
       if(data.id!=null){
         this.loadmovie(data.id);
       }
@@ -168,6 +170,7 @@ export class ManageMovieFormComponent implements OnInit {
       this.service.add(this.getMovieFromForm());
       p.then((saveres:any)=>{
         if(saveres.succeeded){
+          this.snackBar.open('Movie saved successfully','',{duration: 2000});
           if(closeAfterSave){
             this.dialogRef.close(true);
           }else{
