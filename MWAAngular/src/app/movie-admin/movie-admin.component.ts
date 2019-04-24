@@ -19,7 +19,7 @@ export class MovieAdminComponent implements OnInit {
   constructor(public dialog: MatDialog, private service:MovieManagerService) { }
 
   private options;
-  movies={};
+  movies : any;
   displayedColumns: string[] = ['title', 'released', 'director','type', 'descripton','actions'];
 
   ngOnInit(): void {
@@ -95,7 +95,7 @@ export class MovieAdminComponent implements OnInit {
   templateUrl: './manage-movie-form.component.html',
 })
 export class ManageMovieFormComponent implements OnInit {
-  movie={};
+  movie:any;
   form:FormGroup;
   movieid:any = null;
   locking = false;
