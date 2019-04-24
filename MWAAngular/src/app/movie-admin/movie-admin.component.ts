@@ -77,7 +77,7 @@ export class MovieAdminComponent implements OnInit {
   onDelete(movieId){
     this.dialog.open(ConfirmDialogComponent,{data:{message:'Are you sure you want to delete this movie', icon:'warning'}})
     .afterClosed().subscribe(result => {
-      if(result!=null){
+      if(result!=null && result){
         this.service.delete(movieId).then((deleteres:any)=>{
           if(deleteres.succeeded){
             this.refresh(); 
@@ -96,7 +96,7 @@ export class MovieAdminComponent implements OnInit {
   templateUrl: './manage-movie-form.component.html',
 })
 export class ManageMovieFormComponent implements OnInit {
-  movie:any;
+  movie:any = {};
   form:FormGroup;
   movieid:any = null;
   locking = false;
