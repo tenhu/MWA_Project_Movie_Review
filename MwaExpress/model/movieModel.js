@@ -24,7 +24,7 @@ const movieSchema = new Schema({
     review: {
         reviews: [
             {
-                userName: { type: String, require: true},
+                userName: { type: String, require: true },
                 rate: { type: Number, require: true },
                 comment: { type: String, require: true }
             }
@@ -50,5 +50,8 @@ const movieSchema = new Schema({
 
 
 });
+
+movieSchema.index({'title': 'text', 'director':'text', 'type': 'text', 'descripton': 'text'});
+
 movieSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Movies', movieSchema); 
