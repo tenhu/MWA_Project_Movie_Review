@@ -15,4 +15,5 @@
     <button mat-stroked-button color="primary" type="submit" [disabled]="!myform.valid">Login</button>
   </mat-card-actions>
 </form>
+<p class="alert alert-danger" *ngIf="errors>''">{{errors}}</p>
 <p class="alert alert-success" *ngIf="loginsucceeded">Loged-in sucessfully</p>

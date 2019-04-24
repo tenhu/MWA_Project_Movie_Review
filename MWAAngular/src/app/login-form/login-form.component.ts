@@ -15,7 +15,7 @@ export class LoginFormComponent implements OnInit {
 
   myform:FormGroup;
   loginsucceeded = false;
-  errors:[];
+  errors='';
   constructor(private fb:FormBuilder, private loginService:LoginService,private jwtHelper: JwtHelperService, private router: Router) {
     this.myform = this.fb.group({
       'username':['',Validators.required],
@@ -38,10 +38,9 @@ export class LoginFormComponent implements OnInit {
           let userinfo = res.data.userinfo;
           userinfo.jwt = res.data.jwt;
           authStore.dispatch(AuthActions.login(userinfo));
-          this.errors = [];
+          this.errors = '';
           this.loginsucceeded = true;
           this.router.navigate(['/']);
-
         }else{
           this.errors = res.error;
         }
