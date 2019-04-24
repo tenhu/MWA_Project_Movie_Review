@@ -8,6 +8,8 @@
       <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Released:" name="released" 
             formControlName="released" [ngModel]="movie.released"/>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>            
           <mat-error *ngIf="hasError('released','required')">Released is required.</mat-error>
       </mat-form-field>
       <mat-form-field>
