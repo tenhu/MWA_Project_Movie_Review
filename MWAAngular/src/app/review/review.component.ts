@@ -42,7 +42,8 @@ constructor() {}
   clicked2(event:Event) {
     
     console.log("left")
-    this.myindex = 1;
+    this.rateChange.emit(1)
+
     this.showmyRate = false
 
     this.rateUs = false;
