@@ -54,8 +54,6 @@ export class MovieDetailsComponent implements OnInit {
 
   onSubmit(): void {
     if (this.myform.valid) {
-      console.log(this.myform.controls['comment1'].value)
-      console.log(this.newvote)
       if (this.newvote) {
         this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.myform.controls['comment1'].value, 2).then(data => console.log(data));
         this.newvote = false;
@@ -152,17 +150,10 @@ export class MovieDetailsComponent implements OnInit {
     this.rateStar = e;
     console.log(e)
     if (this.newvote) {
+      this.newvote = false
       this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => console.log(data));
     }
-    else {
-
-      {
-        this.rateStar = e;
-        console.log(e)
-        if (this.newvote) {
-          this.newvote = false;
-          this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, "", 2).then(data => console.log(data));
-        }
+   
         else {
 
           this.movie.reviewUpdate(this.movie_id, this.current_userTest, this.rateStar, this.xurrentComment, 1).then(data => console.log(data));
@@ -172,7 +163,7 @@ export class MovieDetailsComponent implements OnInit {
 
 
 
-      }
-    }
+      
+    
   }
 }
